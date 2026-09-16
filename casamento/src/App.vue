@@ -1,30 +1,32 @@
+
 <script setup>
 import { ref } from 'vue'
 
 const respondeu = ref(false)
 
 const posicaoNao = ref({
-  top: '65%',
-  left: '55%'
+  top: '50%',
+  left: '50%'
 })
 
 const mensagens = [
   'Tem certeza? 👀',
   'Pensa melhor... 😏',
   'Hmmmm... 🤨',
-  'Você tem certeza mesmo? ',
-  'Olha o outro botão ali... ',
-  'Vou dar mais uma chance! '
+  'Você tem certeza mesmo?',
+  'Olha o outro botão ali...',
+  'Vou dar mais uma chance!'
 ]
 
 const mensagemNao = ref(mensagens[0])
 
 function moverNao() {
-  const maxX = window.innerWidth - 130
-  const maxY = window.innerHeight - 80
+  const largura = window.innerWidth
+  const altura = window.innerHeight
 
-  const x = Math.max(20, Math.random() * maxX)
-  const y = Math.max(100, Math.random() * maxY)
+  // Mantém o botão sempre dentro da tela
+  const x = Math.random() * (largura - 140) + 20
+  const y = Math.random() * (altura - 120) + 60
 
   posicaoNao.value = {
     left: `${x}px`,
@@ -70,8 +72,8 @@ function aceitar() {
         Tenho uma perguntinha...
       </p>
 
-      <h1>
-        vanderlind vc me daria 
+      <h1 class="pergunta">
+        vanderlind, vc me daria
         um beijinho, meu anjinho?
       </h1>
 
@@ -88,18 +90,18 @@ function aceitar() {
           Sim ❤️
         </button>
 
-       <button
-  class="botao-nao"
-  :style="{
-    left: posicaoNao.left,
-    top: posicaoNao.top
-  }"
-  @mouseenter="moverNao"
-  @touchstart.prevent="moverNao"
-  @click="moverNao"
->
-  Não 😳
-</button>
+        <button
+          class="botao-nao"
+          :style="{
+            left: posicaoNao.left,
+            top: posicaoNao.top
+          }"
+          @mouseenter="moverNao"
+          @touchstart.prevent="moverNao"
+          @click="moverNao"
+        >
+          Não 😳
+        </button>
 
       </div>
 
@@ -121,7 +123,7 @@ function aceitar() {
       </h1>
 
       <p class="texto-final">
-        mumca me enganou 
+        nunca me enganou
       </p>
 
       <div class="coracoes-finais">
@@ -129,7 +131,7 @@ function aceitar() {
       </div>
 
       <p class="finalzinho">
-        Agora não pode voltar atrás hein... 
+        Agora não pode voltar atrás hein...
       </p>
 
     </section>
@@ -214,10 +216,16 @@ body {
   margin-bottom: 15px;
 }
 
-h1 {
+/* PERGUNTA */
+
+.pergunta {
   color: #a8002b;
-  font-size: clamp(38px, 6vw, 60px);
-  line-height: 1.1;
+
+  /* menor que o h1 normal */
+  font-size: clamp(30px, 4.5vw, 45px);
+
+  line-height: 1.2;
+
   margin-bottom: 20px;
 }
 
@@ -231,16 +239,19 @@ h1 {
 
 .botoes {
   height: 100px;
+
   position: relative;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
   gap: 25px;
 }
 
 button {
   border: none;
+
   padding: 16px 40px;
 
   border-radius: 50px;
@@ -252,7 +263,8 @@ button {
 
   transition: 0.25s ease;
 
-  box-shadow: 0 8px 20px rgba(120, 0, 30, 0.15);
+  box-shadow:
+    0 8px 20px rgba(120, 0, 30, 0.15);
 }
 
 .botao-sim {
@@ -260,39 +272,51 @@ button {
   color: white;
 
   position: relative;
+
   z-index: 3;
 }
 
 .botao-sim:hover {
   transform: scale(1.08);
+
   background: #a8002b;
 
-  box-shadow: 0 10px 30px rgba(193, 18, 63, 0.35);
+  box-shadow:
+    0 10px 30px rgba(193, 18, 63, 0.35);
 }
+
+/* BOTÃO NÃO */
 
 .botao-nao {
   background: white;
+
   color: #c1123f;
+
   border: 2px solid #c1123f;
 
   position: fixed;
+
+  z-index: 10;
+
+  transform: translate(-50%, -50%);
 
   transition:
     left 0.35s ease,
     top 0.35s ease,
     transform 0.2s ease;
-
-  z-index: 10;
 }
 
 .botao-nao:hover {
-  transform: scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 .mensagem-nao {
   color: #999;
+
   font-size: 14px;
+
   margin-top: 15px;
+
   min-height: 20px;
 }
 
@@ -392,12 +416,14 @@ button {
 }
 
 .final h1 {
-  font-size: clamp(42px, 7vw, 70px);
+  font-size: clamp(35px, 5vw, 55px);
 }
 
 .texto-final {
   color: #555;
+
   font-size: 24px;
+
   font-weight: bold;
 
   margin-top: 10px;
@@ -405,13 +431,16 @@ button {
 
 .coracoes-finais {
   font-size: 30px;
+
   margin-top: 35px;
 
-  animation: flutuar 2s infinite ease-in-out;
+  animation:
+    flutuar 2s infinite ease-in-out;
 }
 
 .finalzinho {
   color: #999;
+
   margin-top: 30px;
 }
 
@@ -488,22 +517,53 @@ button {
 /* CELULAR */
 
 @media (max-width: 600px) {
+
+  .pagina {
+    padding: 15px;
+  }
+
   .cartao {
-    padding: 40px 20px;
+    width: 94%;
+
     min-height: 480px;
+
+    padding: 35px 20px;
+
+    border-radius: 25px;
   }
 
   .coracao-principal {
-    font-size: 60px;
+    font-size: 55px;
+  }
+
+  .pequeno {
+    font-size: 16px;
+  }
+
+  /* VANDERLIND FICA MENOR NO CELULAR */
+  .pergunta {
+    font-size: 30px;
+    line-height: 1.2;
   }
 
   .subtitulo {
     font-size: 15px;
+
+    margin-bottom: 30px;
   }
 
   button {
-    padding: 14px 30px;
+    padding: 13px 27px;
+
     font-size: 17px;
+  }
+
+  .texto-final {
+    font-size: 20px;
+  }
+
+  .finalzinho {
+    font-size: 14px;
   }
 }
 </style>
