@@ -24,9 +24,8 @@ function moverNao() {
   const largura = window.innerWidth
   const altura = window.innerHeight
 
-  // Mantém o botão sempre dentro da tela
-  const x = Math.random() * (largura - 140) + 20
-  const y = Math.random() * (altura - 120) + 60
+  const x = Math.random() * (largura - 160) + 80
+  const y = Math.random() * (altura - 160) + 80
 
   posicaoNao.value = {
     left: `${x}px`,
@@ -146,13 +145,24 @@ function aceitar() {
   box-sizing: border-box;
 }
 
+html,
+body,
+#app {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }
 
+/* FUNDO */
+
 .pagina {
-  width: 100vw;
+  width: 100%;
+  max-width: 100vw;
   height: 100vh;
   min-height: 600px;
 
@@ -197,7 +207,7 @@ body {
   animation: aparecer 0.8s ease;
 }
 
-/* CORAÇÃO */
+/* CORAÇÃO PRINCIPAL */
 
 .coracao-principal {
   font-size: 75px;
@@ -211,8 +221,11 @@ body {
 
 .pequeno {
   color: #c1123f;
+
   font-size: 18px;
+
   font-weight: bold;
+
   margin-bottom: 15px;
 }
 
@@ -221,7 +234,6 @@ body {
 .pergunta {
   color: #a8002b;
 
-  /* menor que o h1 normal */
   font-size: clamp(30px, 4.5vw, 45px);
 
   line-height: 1.2;
@@ -231,7 +243,9 @@ body {
 
 .subtitulo {
   color: #666;
+
   font-size: 17px;
+
   margin-bottom: 45px;
 }
 
@@ -243,7 +257,9 @@ body {
   position: relative;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   gap: 25px;
@@ -257,6 +273,7 @@ button {
   border-radius: 50px;
 
   font-size: 19px;
+
   font-weight: bold;
 
   cursor: pointer;
@@ -267,8 +284,11 @@ button {
     0 8px 20px rgba(120, 0, 30, 0.15);
 }
 
+/* SIM */
+
 .botao-sim {
   background: #c1123f;
+
   color: white;
 
   position: relative;
@@ -285,7 +305,7 @@ button {
     0 10px 30px rgba(193, 18, 63, 0.35);
 }
 
-/* BOTÃO NÃO */
+/* NÃO */
 
 .botao-nao {
   background: white;
@@ -296,14 +316,13 @@ button {
 
   position: fixed;
 
-  z-index: 10;
+  z-index: 20;
 
   transform: translate(-50%, -50%);
 
   transition:
     left 0.35s ease,
-    top 0.35s ease,
-    transform 0.2s ease;
+    top 0.35s ease;
 }
 
 .botao-nao:hover {
@@ -400,8 +419,11 @@ button {
   min-height: 450px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   align-items: center;
 }
 
@@ -497,6 +519,7 @@ button {
 @keyframes subir {
   from {
     transform: translateY(110vh) rotate(0deg);
+
     opacity: 0;
   }
 
@@ -510,6 +533,7 @@ button {
 
   to {
     transform: translateY(-120px) rotate(360deg);
+
     opacity: 0;
   }
 }
@@ -519,6 +543,11 @@ button {
 @media (max-width: 600px) {
 
   .pagina {
+    width: 100%;
+    max-width: 100vw;
+
+    min-height: 100vh;
+
     padding: 15px;
   }
 
@@ -527,7 +556,7 @@ button {
 
     min-height: 480px;
 
-    padding: 35px 20px;
+    padding: 40px 20px;
 
     border-radius: 25px;
   }
@@ -540,9 +569,9 @@ button {
     font-size: 16px;
   }
 
-  /* VANDERLIND FICA MENOR NO CELULAR */
   .pergunta {
     font-size: 30px;
+
     line-height: 1.2;
   }
 
@@ -553,7 +582,7 @@ button {
   }
 
   button {
-    padding: 13px 27px;
+    padding: 14px 30px;
 
     font-size: 17px;
   }
